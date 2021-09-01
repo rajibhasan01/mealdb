@@ -4,10 +4,7 @@ const searchMeal = () => {
     inputField.value = '';
 
     if(inputValue == ''){
-        // need to write some code
-        //
-        // 
-        // 
+         displayMassage('Invalid input, please give a valid food name!');
     }
     else{
         // load data from server
@@ -15,17 +12,20 @@ const searchMeal = () => {
         fetch(url)
         .then(res => res.json())
         .then(data => displayMeals(data.meals))
-        .catch(error => displayError(error));
+        .catch(error => displayMassage("Sorry! Something went wrong. Try again later."));
     }
 
 } 
 
-const displayError = error => {
-    // need to write some code
-    // 
-    // 
-    // 
+const displayMassage = errorMsg =>{
+        const msg = document.getElementById('error-msg');
+        msg.innerText = errorMsg;
+
+        let myAlert = document.querySelector('.toast');
+        let bsAlert = new bootstrap.Toast(myAlert);
+        bsAlert.show();
 }
+
 
 const displayMeals = items => {
     const container = document.getElementById('result-container');
@@ -53,7 +53,7 @@ const loadItem = id =>{
     fetch(url)
     .then(res => res.json())
     .then(data => displaySingleMeal(data.meals[0]))
-    .catch(error => displayError(error));
+    .catch(error => displayMassage("Sorry! Something went wrong. Try again later."));
 }
 
 const displaySingleMeal = item => {
@@ -64,14 +64,14 @@ const displaySingleMeal = item => {
     div.classList.add('card');
     div.innerHTML = `
             <img src="${item.strMealThumb}" class="card-img-top" alt="...">
-            <span class="cross-btn fs-1 text" data-bs-dismiss="modal">x</span>
+            <button class="btn-close me-2 m-auto cross-btn p-2" data-bs-dismiss="modal"></button>
             <div class="card-body">
                 <h5 class="card-title">${item.strMeal}</h5>
                 <p class="card-text">${item.strInstructions.slice(0,200)}</p>
                 <div class="d-flex">
                     <div class="me-auto">
-                        <a href="${item.strYoutube}" target="_blank" class="btn btn-primary">Youtube</a>
-                        <a href="${item.strSource}" target="_blank" class="btn btn-primary">Instagram</a>
+                        <a href="${item.strYoutube}" target="_blank" class="btn btn-danger">Youtube</a>
+                        <a href="${item.strSource}" target="_blank" class="btn btn-success">Instagram</a>
                     </div>
                     <div>
                         <a href="${item.strSource}" target="_blank" class="btn btn-warning">Order Now</a>
