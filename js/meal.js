@@ -18,9 +18,12 @@ const searchMeal = () => {
 } 
 
 const displayMassage = errorMsg =>{
+        const container = document.getElementById('result-container');
+        // clear innertext of div
+        container.textContent = '';
         const msg = document.getElementById('error-msg');
         msg.innerText = errorMsg;
-
+        console.log('error msg')
         let myAlert = document.querySelector('.toast');
         let bsAlert = new bootstrap.Toast(myAlert);
         bsAlert.show();
