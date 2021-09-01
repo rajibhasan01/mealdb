@@ -37,10 +37,12 @@ const displayMeals = items => {
        div.classList.add('col');
        div.innerHTML = `
             <div onclick = "loadItem(${item.idMeal})" class="card overflow-hidden" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                <img src="${item.strMealThumb}" class="card-img-top image" alt="...">
+                <div class="overflow-hidden">
+                    <img src="${item.strMealThumb}" class="card-img-top image" alt="...">
+                </div>
                 <div class="card-body">
                     <h5 class="card-title">${item.strMeal}</h5>
-                    <p class="card-text">${item.strInstructions.slice(0,200)}</p>
+                    <p class="card-text text-muted">${item.strInstructions.slice(0,200)}</p>
                 </div>
             </div>
        `;
@@ -67,7 +69,8 @@ const displaySingleMeal = item => {
             <button class="btn-close me-2 m-auto cross-btn p-2" data-bs-dismiss="modal"></button>
             <div class="card-body">
                 <h5 class="card-title">${item.strMeal}</h5>
-                <p class="card-text">${item.strInstructions.slice(0,200)}</p>
+                <p class="card-text text-muted">${item.strInstructions.slice(0,200)}</p>
+                <p class="card-text"><span class="fw-bold text text-secondary">$</span><span class="text-secondary fw-bold text">${item.idMeal.slice(0,1)}.00 </span></p>
                 <div class="d-flex">
                     <div class="me-auto">
                         <a href="${item.strYoutube}" target="_blank" class="btn btn-danger">Youtube</a>
